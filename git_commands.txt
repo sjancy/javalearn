@@ -1,0 +1,11 @@
+git clone -> download new repository
+
+git checkout -> change branch
+
+
+git status
+
+
+git add
+git commit -m "commit message"
+git push
