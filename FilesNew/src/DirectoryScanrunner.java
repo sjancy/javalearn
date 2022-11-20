@@ -15,7 +15,7 @@ public class DirectoryScanrunner {
          Predicate<? super Path> predicate=path->String.valueOf(path).contains(".java");
 		Files.walk(currentDirectory, 2)
          .filter(predicate)
-         .forEach(System.out::println);
+         .forEach(i -> System.out.println(i));
 	}
 
 }
