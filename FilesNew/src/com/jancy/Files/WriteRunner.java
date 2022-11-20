@@ -18,6 +18,7 @@ public class WriteRunner {
 		listAl.add("Boy");
 		listAl.add("Elephant");
 		listAl.add("Dog");
+		listAl.add("Tiger");
 
 		Files.write(pathFileToWrite, listAl);
 	}
