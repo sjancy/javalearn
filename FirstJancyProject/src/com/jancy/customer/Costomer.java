@@ -51,6 +51,7 @@ public class Costomer {
 		//con.close();
 
 		}
+		//test
 		
 		
 		if(add==2) {
