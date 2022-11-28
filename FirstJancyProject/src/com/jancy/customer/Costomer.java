@@ -23,18 +23,18 @@ public class Costomer {
 		
 		System.out.println("Enter your choice:");
 		int a=sc.nextInt();
-	
+	if(a==1) {
 		System.out.println("Customer details are:");
 		System.out.println("1.Add");
 		System.out.println("2.View");
 		System.out.println("3.Update");
 		System.out.println("4.Delete");
-		
-		
-		System.out.println("Enter your choice:");
-		int add=sc.nextInt();
-		
-		if(add==1) {
+	
+	
+	System.out.println("Enter your choice:");
+	int customer=sc.nextInt();
+
+		if(customer==1) {
 		System.out.println("Enter your ID:");
 		int id=sc.nextInt();
 		System.out.println("Enter your name:");
@@ -51,10 +51,7 @@ public class Costomer {
 		//con.close();
 
 		}
-		//test
-		
-		
-		if(add==2) {
+		if(customer==2) {
 			System.out.println("Enter your ID:");
 			int viewid=sc.nextInt();
 			
@@ -71,16 +68,10 @@ public class Costomer {
 				
 				System.out.println(cid+"   "+cname+"   "+caddress+ "   "+cph);
 			}
-				con.close();
-				
-			
-
-
+				//con.close();
 		}
 		
-		
-		
-		if(add==3) {
+		if(customer==3) {
 		System.out.println("Enter your ID:");
 		int uid=sc.nextInt();
 		System.out.println("Enter your name:");
@@ -90,9 +81,7 @@ public class Costomer {
 		stmt.execute(ud);
 		//con.close();
 		}
-		
-		
-		if(add==4) {
+		if(customer==4) {
 		System.out.println("Enter your ID:");
 		int uid=sc.nextInt();
  		String udelete="DELETE FROM CUSTOMER WHERE CUTOMER_ID="+uid+"";
@@ -100,8 +89,53 @@ public class Costomer {
 		stmt.execute(udelete);
 		//con.close();
 		}
+	}
 
+		if(a==2) {
+			System.out.println("Account details are:");
+			System.out.println("1.Add");
+			System.out.println("2.View");
+			System.out.println("3.Update");
+			System.out.println("4.Delete");
+		
+		System.out.println("Enter your choice:");
+		int Account=sc.nextInt();
 
+			if(Account==1) {
+			System.out.println("Enter your Cust_ID:");
+			int Cid=sc.nextInt();
+			System.out.println("Enter your Acc_ID:");
+			int Aid=sc.nextInt();
+			System.out.println("Enter your Amount:");
+			int amount=sc.nextInt();
+		
+			String accountinsert="INSERT INTO ACCOUNT VALUES ("+Cid+","+Aid+","+amount+")";
+			System.out.println("query: "+accountinsert);
+			stmt.execute(accountinsert);
+			//con.close();
+			}
+			
+			if(Account==2) {
+				System.out.println("Enter your ID:");
+				int viewCid=sc.nextInt();
+				
+				String view="select CUTOMER_ID,ACC_ID,AMOUNT from ACCOUNT WHERE CUTOMER_ID="+viewCid+"";
+		 		//System.out.println("query: "+view);	
+
+				ResultSet rs=stmt.executeQuery(view);
+				
+				while(rs.next()) {
+					int cid=rs.getInt("CUTOMER_ID");
+					int Aid=rs.getInt("ACC_ID");
+					int amount=rs.getInt("AMOUNT");
+					System.out.println(cid+"   "+Aid+"   "+amount);
+				}
+					con.close();
+			}
+			
+			
+			
+		}
 	}
 
 }

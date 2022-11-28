@@ -5,7 +5,7 @@ git checkout -> change branch
 
 git status
 
-
-git add
+git pull   -> pull changes done  by others
+git add <file name>
 git commit -m "commit message"
 git push
