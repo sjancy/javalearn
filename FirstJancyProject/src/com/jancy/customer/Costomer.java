@@ -51,6 +51,7 @@ public class Costomer {
 		//con.close();
 
 		}
+		
 		if(customer==2) {
 			System.out.println("Enter your ID:");
 			int viewid=sc.nextInt();
@@ -91,15 +92,17 @@ public class Costomer {
 		}
 	}
 
-		if(a==2) {
+	if(a==2) {
 			System.out.println("Account details are:");
 			System.out.println("1.Add");
 			System.out.println("2.View");
 			System.out.println("3.Update");
 			System.out.println("4.Delete");
-		
+			//System.out.println("5.Back to Main Menu");
+
 		System.out.println("Enter your choice:");
 		int Account=sc.nextInt();
+		
 
 			if(Account==1) {
 			System.out.println("Enter your Cust_ID:");
@@ -130,12 +133,140 @@ public class Costomer {
 					int amount=rs.getInt("AMOUNT");
 					System.out.println(cid+"   "+Aid+"   "+amount);
 				}
-					con.close();
+					//con.close();
 			}
-			
-			
-			
+			if(Account==3) {
+				System.out.println("Enter your ID:");
+				int uid=sc.nextInt();
+				System.out.println("Enter your ammount:");
+				int amount=sc.nextInt();
+		 		String accountupdate="UPDATE ACCOUNT SET AMOUNT="+amount+" WHERE CUTOMER_ID="+uid+"";
+		 		System.out.println("query: "+accountupdate);	
+				stmt.execute(accountupdate);
+				//con.close();
+				}
+			if(Account==4) {
+				System.out.println("Enter your ID:");
+				int aid=sc.nextInt();
+		 		String accountdelete="DELETE FROM ACCOUNT WHERE CUTOMER_ID="+aid+"";
+		 		System.out.println("query: "+accountdelete);	
+				stmt.execute(accountdelete);
+				//con.close();
+				}
 		}
+
+
+	if(a==3) {
+		System.out.println("Transation details are:");
+		System.out.println("1.Withdraw");
+		System.out.println("2.Deposit");
+		System.out.println("3.View Recent Transation");
+
+	System.out.println("Enter your choice:");
+	int Transation=sc.nextInt();
+	
+	if(Transation==1) {
+		System.out.println("Enter your Acc_ID:");
+		int Accid=sc.nextInt();
+     	System.out.println("Enter your T_ID:");
+	   int Transid=sc.nextInt();
+	   System.out.println("Enter the Type:");
+	   String type=sc.next();
+	   System.out.println("Enter your Amount:");
+	   int withdrawAmount=sc.nextInt();
+
+	   String withdraw="INSERT INTO TRANSATION VALUES ("+Accid+","+Transid+",'"+type+"',"+withdrawAmount+")";
+	   System.out.println("query: "+withdraw);
+	   
+	   stmt.execute(withdraw);
+	   
+	   //Insert transation done.
+	   String view="select AMOUNT from ACCOUNT WHERE ACC_ID="+Accid+"";
+		ResultSet rs=stmt.executeQuery(view);
+		
+		int currentBalance = 0;
+		while(rs.next()) {
+			currentBalance = rs.getInt("AMOUNT");
+			System.out.println(currentBalance);
+		}
+		
+		int newBalance = currentBalance - withdrawAmount;
+
+	  		   
+	   String up="UPDATE ACCOUNT SET AMOUNT="+newBalance+" WHERE ACC_ID="+Accid+"";
+	   stmt.execute(up);
+	   System.out.println("up: "+up);
+		
+		    //con.close();
 	}
+	
+	
+	if(Transation==2) {
+		System.out.println("Enter your Acc_ID:");
+		int Accid=sc.nextInt();
+     	System.out.println("Enter your T_ID:");
+	   int Transid=sc.nextInt();
+	   System.out.println("Enter the Type:");
+	   String type=sc.next();
+	   System.out.println("Enter your Amount:");
+	   int depositwAmount=sc.nextInt();
+
+	   String deposit="INSERT INTO TRANSATION VALUES ("+Accid+","+Transid+",'"+type+"',"+depositwAmount+")";
+	   System.out.println("query: "+deposit);
+	   
+	   stmt.execute(deposit);
+	   
+	   //Insert transation done.
+	   String view="select AMOUNT from ACCOUNT WHERE ACC_ID="+Accid+"";
+		ResultSet rs=stmt.executeQuery(view);
+		
+		int currentBalance = 0;
+		while(rs.next()) {
+			currentBalance = rs.getInt("AMOUNT");
+			System.out.println(currentBalance);
+		}
+		
+		int newBalance = currentBalance + depositwAmount;
+
+	  		   
+	   String up="UPDATE ACCOUNT SET AMOUNT="+newBalance+" WHERE ACC_ID="+Accid+"";
+	   stmt.execute(up);
+	   System.out.println("up: "+up);
+		
+		    //con.close();
+		    
+	}
+	
+	if(Transation==3) {
+		System.out.println("Enter your ID:");
+		int viewLastTransation=sc.nextInt();
+		
+		String view="select ACC_ID,T_ID,TYPE,MONEY from TRANSATION WHERE ACC_ID="+viewLastTransation+"";
+ 		//System.out.println("query: "+view);	
+
+		ResultSet rs=stmt.executeQuery(view);
+		
+		while(rs.next()) {
+			
+			int Aid=rs.getInt("ACC_ID");
+			int tid=rs.getInt("T_ID");
+			String type=rs.getString("TYPE");
+			int money=rs.getInt("MONEY");
+			System.out.println(Aid+"   "+tid+"   "+type+"  "+money);
+		}
+			//con.close();
+	}
+
+	
+
+	
+
+
+		
+	}
+
+
+	}
+	
 
 }
