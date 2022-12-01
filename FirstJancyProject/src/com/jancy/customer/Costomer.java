@@ -29,8 +29,9 @@ public class Costomer {
 		System.out.println("2.View");
 		System.out.println("3.Update");
 		System.out.println("4.Delete");
+		System.out.println("5.Back to the Main Menu");
 	
-	
+		
 	System.out.println("Enter your choice:");
 	int customer=sc.nextInt();
 
@@ -88,11 +89,14 @@ public class Costomer {
  		String udelete="DELETE FROM CUSTOMER WHERE CUTOMER_ID="+uid+"";
  		System.out.println("query: "+udelete);	
 		stmt.execute(udelete);
-		//con.close();
+		con.close();
 		}
+		
+	
 	}
-
-	if(a==2) {
+		
+	
+	/*if(a==2) {
 			System.out.println("Account details are:");
 			System.out.println("1.Add");
 			System.out.println("2.View");
@@ -255,17 +259,9 @@ public class Costomer {
 			System.out.println(Aid+"   "+tid+"   "+type+"  "+money);
 		}
 			//con.close();
-	}
+	}*/
 
 	
-
-	
-
-
-		
-	}
-
-
 	}
 	
 

@@ -20,11 +20,15 @@ public class CustomerService {
 		address+=sc.nextLine();
 		System.out.println("Enter Customer city:");
 		String city=sc.next();
+		System.out.println("Enter Customer phone_no:");
+		int phoneno=sc.nextInt();
+
 
 		Customer customer = new Customer();
 		customer.setCustomerName(name);
 		customer.setCustomerAddress(address);
 		customer.setCity(city);
+		customer.setPhone_no(phoneno);
 		
 		Integer newCustomerId = customerDao.getNewCustomerId();
 		customer.setCustomerId(newCustomerId);
@@ -42,12 +46,16 @@ public class CustomerService {
 		address+=sc.nextLine();
 		System.out.println("Enter Customer city:");
 		String city=sc.next();
+		System.out.println("Enter Customer phone_no:");
+		int phoneno=sc.nextInt();
+
 
 		Customer customer = new Customer();
 		customer.setCustomerId(customerId);
 		customer.setCustomerName(name);
 		customer.setCustomerAddress(address);
 		customer.setCity(city);
+		customer.setPhone_no(phoneno);
 
 		
 		customerDao.updateCustomer(customer);

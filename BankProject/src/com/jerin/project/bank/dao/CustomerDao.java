@@ -15,7 +15,7 @@ public class CustomerDao {
 		Statement stmt= null;
 		try {
 			con = DBUtils.getConnection();
-			String insertCustomerQuery = "insert into customer values ("+customer.getCustomerId()+", '"+customer.getCustomerName()+"', '"+customer.getCustomerAddress()+"', '"+customer.getCity()+"', NOW(), 'SYSTEM', null, null)";
+			String insertCustomerQuery = "insert into customer values ("+customer.getCustomerId()+", '"+customer.getCustomerName()+"', '"+customer.getCustomerAddress()+"', '"+customer.getCity()+"', "+customer.getPhone_no()+",  NOW(), 'SYSTEM', null, null)";
 			System.out.println("Insert Customer Query: "+insertCustomerQuery);
 			stmt = con.createStatement();
 			stmt.execute(insertCustomerQuery);
@@ -35,7 +35,7 @@ public class CustomerDao {
 			con = DBUtils.getConnection();
 			stmt=con.createStatement();
 
-			String selectCustomerQuery = "select customer_id,customer_name,address,city, created_date, created_by, updated_date, updated_by from customer WHERE CUSTOMER_ID="+customerId;
+			String selectCustomerQuery = "select customer_id,customer_name,address,city, phone_no,created_date, created_by, updated_date, updated_by from customer WHERE CUSTOMER_ID="+customerId;
 			System.out.println("Get Customer Query: "+selectCustomerQuery);
 			ResultSet rs = stmt.executeQuery(selectCustomerQuery);
 			customer = new Customer();
@@ -46,6 +46,7 @@ public class CustomerDao {
 				String customerName=rs.getString("CUSTOMER_NAME");
 				String customerAddress=rs.getString("ADDRESS");
 				String city=rs.getString("CITY");
+				int phoneno=rs.getInt("PHONE_NO");
 				Date createdDate = rs.getDate("CREATED_DATE");
 				String createdBy = rs.getString("CREATED_BY");
 				Date updatedDate = rs.getDate("UPDATED_DATE");
@@ -55,6 +56,7 @@ public class CustomerDao {
 				customer.setCustomerName(customerName);
 				customer.setCustomerAddress(customerAddress);
 				customer.setCity(city);
+				customer.setPhone_no(phoneno);
 				customer.setCreatedDate(createdDate);
 				customer.setCreatedBy(createdBy);
 				customer.setUpdatedDate(updatedDate);
@@ -78,7 +80,7 @@ public class CustomerDao {
 			con = DBUtils.getConnection();
 			stmt=con.createStatement();
 			
-			String updateCustomerQuery = "update customer set customer_name='"+customer.getCustomerName()+"',address='"+customer.getCustomerAddress()+"',city='"+customer.getCity()+"',updated_date=NOW(), updated_by='SYSTEM' WHERE CUSTOMER_ID="+customer.getCustomerId();
+			String updateCustomerQuery = "update customer set customer_name='"+customer.getCustomerName()+"',address='"+customer.getCustomerAddress()+"',city='"+customer.getCity()+"', phone_no="+customer.getPhone_no()+", updated_date=NOW(), updated_by='SYSTEM' WHERE CUSTOMER_ID="+customer.getCustomerId();
 			System.out.println("Update Customer Query: "+updateCustomerQuery);
 			stmt.execute(updateCustomerQuery);
 

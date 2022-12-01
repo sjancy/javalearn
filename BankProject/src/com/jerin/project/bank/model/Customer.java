@@ -8,6 +8,7 @@ public class Customer {
 	private String customerName;
 	private String customerAddress;
 	private String city;
+	private Integer phone_no;
 	
 	private Date createdDate;
 	private String createdBy;
@@ -39,6 +40,13 @@ public class Customer {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	public Integer getPhone_no() {
+		return phone_no;
+	}
+	public void setPhone_no(Integer phone_no) {
+		this.phone_no = phone_no;
+	}
+
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -67,7 +75,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerAddress="
-				+ customerAddress + ", city=" + city + ", createdDate=" + createdDate + ", createdBy=" + createdBy
+				+ customerAddress + ", city=" + city + ", phone_no="  + phone_no +",createdDate=" + createdDate + ", createdBy=" + createdBy
 				+ ", updatedDate=" + updatedDate + ", updatedBy=" + updatedBy + "]";
 	}
 }

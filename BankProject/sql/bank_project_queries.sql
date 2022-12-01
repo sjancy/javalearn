@@ -15,6 +15,8 @@ create table customer (
 	PRIMARY KEY(customer_id)
 );
 
+alter table customer ADD phone_no int AFTER city;
+
 select * from customer;
 
 delete from customer where customer_id = 0;
