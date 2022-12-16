@@ -71,11 +71,12 @@ public class Customer {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerAddress="
-				+ customerAddress + ", city=" + city + ", phone_no="  + phone_no +",createdDate=" + createdDate + ", createdBy=" + createdBy
-				+ ", updatedDate=" + updatedDate + ", updatedBy=" + updatedBy + "]";
+				+ customerAddress + ", city=" + city + ", phone_no=" + phone_no + ", createdDate=" + createdDate
+				+ ", createdBy=" + createdBy + ", updatedDate=" + updatedDate + ", updatedBy=" + updatedBy + "]";
 	}
+
+
 }

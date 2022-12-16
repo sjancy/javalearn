@@ -23,20 +23,47 @@ public class TransactionService {
 		String transactionType = getTransactionType();
 		System.out.println("Enter Transaction Amount:");
 		Double transactionAmount = sc.nextDouble();
-
+		
 		Transaction transaction = new Transaction();
 		transaction.setAccountId(accountId);
 		transaction.setTransactionType(transactionType);
 		transaction.setTransactionAmount(transactionAmount);
+		
+		boolean accountHasBalance =true;
 
-		Integer newTransactionId = transactionDao.getNewTransactionId();
-		transaction.setTransactionId(newTransactionId);
-		transactionDao.createTransaction(transaction);
+		if (transactionType.equalsIgnoreCase(WITHDRAW)) {
 
-		// Update Account
-		Account account = accountDao.getAccount(accountId);
-		account.setAccountBalance(getAccountBalance(account, transaction));
-		accountDao.updateAccount(account);
+			// transactionAmount
+			// currentBalance
+			Account account1 = accountDao.getAccount(accountId);
+			Double currentBalance = account1.getAccountBalance();
+			accountHasBalance = checkIfAccountHasBalance(currentBalance, transactionAmount);
+		}
+		
+		//String withdrawbalance=getWithdrawBalance();
+			
+		
+		if(accountHasBalance==true) {
+			Integer newTransactionId = transactionDao.getNewTransactionId();
+			transaction.setTransactionId(newTransactionId);
+			transactionDao.createTransaction(transaction);
+	
+			// Update Account
+			Account account = accountDao.getAccount(accountId);
+			account.setAccountBalance(getAccountBalance(account, transaction));
+			accountDao.updateAccount(account);
+		}else {
+			System.out.println("insufficient balance.");
+		}
+	}
+	
+	
+	boolean checkIfAccountHasBalance(Double currentBalance, Double transactionAmount){
+		if(currentBalance>=transactionAmount) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public void updateTransaction() {
@@ -48,16 +75,21 @@ public class TransactionService {
 		String transactionType = getTransactionType();
 		System.out.println("Enter Transaction Amount:");
 		Double transactionAmount = sc.nextDouble();
+		
+		
 
 		Transaction transaction = new Transaction();
 		transaction.setTransactionId(transactionId);
 		transaction.setAccountId(accountId);
 		transaction.setTransactionType(transactionType);
 		transaction.setTransactionAmount(transactionAmount);
+		
+		
 
 		transactionDao.updateTransaction(transaction);
 		System.out.println("Transaction " + transactionId + " updated.");
 	}
+
 
 	private String getTransactionType() {
 		System.out.println("Enter Transaction Type [W - Withdraw / D - Deposit]:");
@@ -77,9 +109,12 @@ public class TransactionService {
 
 		String transactionType = transaction.getTransactionType();
 
-		if (transactionType.equals(WITHDRAW)) {
+		if (transactionType.equalsIgnoreCase(WITHDRAW)) {
+			
+		
 			accountBalance = currentBalance - transactionAmount;
-		} else {
+		
+			} else {
 			accountBalance = currentBalance + transactionAmount;
 		}
 		return accountBalance;

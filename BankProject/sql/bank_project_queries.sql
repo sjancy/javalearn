@@ -19,13 +19,15 @@ alter table customer ADD phone_no int AFTER city;
 
 select * from customer;
 
+select * from customer where customer_id = 101;
+
 delete from customer where customer_id = 0;
 
 insert into customer values (101, 'Jerin', '1315 Riverchase Dr Apt 2117', 'Coppell', NOW(), 'SYSTEM', null, null);
 
 select max(CUSTOMER_ID)+1 as CUSTOMER_ID from customer;
 
-
+rollback;
 commit;
 ----------------------------------------------------
 
@@ -44,7 +46,7 @@ create table account (
 
 -- drop table account;
 
-insert into account values(1001, 101, 145.25, NOW(), 'SYSTEM', null, null);
+insert into account values(1003, 103, 140, NOW(), 'SYSTEM', null, null);
 commit;
 
 select * from account;

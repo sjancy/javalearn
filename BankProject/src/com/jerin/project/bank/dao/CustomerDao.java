@@ -10,9 +10,11 @@ import com.jerin.project.bank.model.Customer;
 
 public class CustomerDao {
 	
+
 	public void createCustomer(Customer customer)  {
 		Connection con= null;
 		Statement stmt= null;
+		
 		try {
 			con = DBUtils.getConnection();
 			String insertCustomerQuery = "insert into customer values ("+customer.getCustomerId()+", '"+customer.getCustomerName()+"', '"+customer.getCustomerAddress()+"', '"+customer.getCity()+"', "+customer.getPhone_no()+",  NOW(), 'SYSTEM', null, null)";
@@ -28,7 +30,7 @@ public class CustomerDao {
 	}
 	
 	public Customer getCustomer(Integer customerId) {
-		Customer customer = null;
+		Customer customer =  new Customer();
 		Connection con = null;
 		Statement stmt= null;
 		try {
@@ -38,7 +40,6 @@ public class CustomerDao {
 			String selectCustomerQuery = "select customer_id,customer_name,address,city, phone_no,created_date, created_by, updated_date, updated_by from customer WHERE CUSTOMER_ID="+customerId;
 			System.out.println("Get Customer Query: "+selectCustomerQuery);
 			ResultSet rs = stmt.executeQuery(selectCustomerQuery);
-			customer = new Customer();
 			
 			if(rs.next()) {
 	
@@ -80,7 +81,8 @@ public class CustomerDao {
 			con = DBUtils.getConnection();
 			stmt=con.createStatement();
 			
-			String updateCustomerQuery = "update customer set customer_name='"+customer.getCustomerName()+"',address='"+customer.getCustomerAddress()+"',city='"+customer.getCity()+"', phone_no="+customer.getPhone_no()+", updated_date=NOW(), updated_by='SYSTEM' WHERE CUSTOMER_ID="+customer.getCustomerId();
+			String updateCustomerQuery = "update customer set customer_name='"+customer.getCustomerName()+"',address='"+customer.getCustomerAddress()+"',city='"+customer.getCity()+"', "
+					+ "phone_no="+customer.getPhone_no()+", updated_date=NOW(), updated_by='SYSTEM' WHERE CUSTOMER_ID="+customer.getCustomerId();
 			System.out.println("Update Customer Query: "+updateCustomerQuery);
 			stmt.execute(updateCustomerQuery);
 
@@ -124,7 +126,7 @@ public class CustomerDao {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(getNewCustIdQuery);
 
-			while (rs.next()) {
+			if (rs.next()) {
 				int cid = rs.getInt("CUSTOMER_ID");
 				return cid;
 			}
