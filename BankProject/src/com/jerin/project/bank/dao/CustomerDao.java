@@ -17,7 +17,8 @@ public class CustomerDao {
 		
 		try {
 			con = DBUtils.getConnection();
-			String insertCustomerQuery = "insert into customer values ("+customer.getCustomerId()+", '"+customer.getCustomerName()+"', '"+customer.getCustomerAddress()+"', '"+customer.getCity()+"', "+customer.getPhone_no()+",  NOW(), 'SYSTEM', null, null)";
+			String insertCustomerQuery = "insert into customer values ("+customer.getCustomerId()+", '"+customer.getCustomerName()+"', '"+customer.getCustomerAddress()+"', "
+					+ "'"+customer.getCity()+"', "+customer.getPhone_no()+",  NOW(), 'SYSTEM', null, null)";
 			System.out.println("Insert Customer Query: "+insertCustomerQuery);
 			stmt = con.createStatement();
 			stmt.execute(insertCustomerQuery);
