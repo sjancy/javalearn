@@ -28,6 +28,12 @@
   	<description></description>
   	<servlet-class>com.jancy.web.DeleteBankCustomerController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddBankAccountController</servlet-name>
+  	<display-name>AddBankAccountController</display-name>
+  	<description></description>
+  	<servlet-class>com.jancy.web.AddBankAccountController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>GetBankCustomerController</servlet-name>
   	<url-pattern>/getCustomer</url-pattern>
@@ -43,6 +49,10 @@
   <servlet-mapping>
   	<servlet-name>DeleteBankCustomerController</servlet-name>
   	<url-pattern>/deleteCustomer</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddBankAccountController</servlet-name>
+  	<url-pattern>/addAccount</url-pattern>
   </servlet-mapping>
   
   
